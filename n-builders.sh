@@ -34,6 +34,7 @@ function check_dependencies() {
 	   git clone https://github.com/Unicamp-OpenPower/docker.git
 	   cd ./docker
 	   ./install_docker.sh
+	   export CONTAINER_RUNTIME="docker"
 	fi
 }
 
