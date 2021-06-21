@@ -30,8 +30,10 @@ function check_dependencies() {
 	   echo "Setting docker as container runtime..."
 	   export CONTAINER_RUNTIME="docker"
 	else
-	   echo "ERROR: please, install either podman or docker!"
-	   exit 1
+	   echo "WARNING: installing Docker"
+	   git clone https://github.com/Unicamp-OpenPower/docker.git
+	   cd ./docker
+	   ./install_docker.sh
 	fi
 }
 
