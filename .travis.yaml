@@ -1,0 +1,15 @@
+sudo: required
+
+services: docker
+
+os: linux
+
+arch: ppc64le
+
+script:
+  - git clone --single-branch --branch enterprise-2.2 https://github.com/travis-ci/travis-build.git
+  - cd ./travis-build
+  - docker build -t travis-build --build-arg GITHUB_OAUTH_TOKEN="$GH_TOKEN" .
+  - docker tag travis-build:latest quay.io/rpsene/travis-build:latest
+  - docker login -u="$QUAY_USER" -p="$QUAY_PWD" quay.io
+  - docker push quay.io/rpsene/travis-build:latest
