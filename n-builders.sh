@@ -38,20 +38,28 @@ function check_dependencies() {
 	fi
 }
 
-function pull-travis-build {
+function clean() {
+	docker stop $(docker ps -a -q)
+	docker rm $(docker ps -a -q)
+	docker rmi $(docker images -q)
+}
+
+function pull-travis-build() {
     "$CONTAINER_RUNTIME" pull quay.io/rpsene/travis-build:latest
 }
 
-function start-travis-build {
+function start-travis-build() {
     #SUFIX=$(date +%s | sha256sum | base64 | head -c 6 ; echo)
     SUFIX=$(openssl rand -hex 6)
     "$CONTAINER_RUNTIME" run --hostname=travis-build --name travis-build-$SUFIX --restart=always \
-    -d -p $1:4000 quay.io/rpsene/travis-build:latest
+    -d -p $1:4000 quay.io/rpsene/travis-build:travis-build-ee-jdk
+    #travis-build:latest
 }
 
 PORTS=( 4000 4001 4002 4003 )
 
 check_dependencies
+clean
 pull-travis-build
 for port in ${PORTS[*]}; do
   start-travis-build $port
