@@ -45,7 +45,7 @@ function clean() {
 }
 
 function pull-travis-build() {
-    "$CONTAINER_RUNTIME" pull quay.io/rpsene/travis-build:latest
+    "$CONTAINER_RUNTIME" pull quay.io/rpsene/travis-build:travis-build-ee-jdk
 }
 
 function start-travis-build() {
