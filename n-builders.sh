@@ -52,8 +52,7 @@ function start-travis-build() {
     #SUFIX=$(date +%s | sha256sum | base64 | head -c 6 ; echo)
     SUFIX=$(openssl rand -hex 6)
     "$CONTAINER_RUNTIME" run --hostname=travis-build --name travis-build-$SUFIX --restart=always \
-    -d -p $1:4000 quay.io/rpsene/travis-build:travis-build-ee-jdk
-    #travis-build:latest
+    -d -p $1:4000 quay.io/rpsene/travis-build:latest
 }
 
 PORTS=( 4000 4001 4002 4003 )
