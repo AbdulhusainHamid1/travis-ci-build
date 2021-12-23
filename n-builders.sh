@@ -50,7 +50,7 @@ function pull-travis-build() {
 
 function start-travis-build() {
     #SUFIX=$(date +%s | sha256sum | base64 | head -c 6 ; echo)
-    SUFIX=$(openssl rand -hex 6)
+    SUFIX=$(openssl rand -hex 8)
     "$CONTAINER_RUNTIME" run --hostname=travis-build --name travis-build-$SUFIX --restart=always \
     -d -p $1:4000 quay.io/rpsene/travis-build:latest
 }
