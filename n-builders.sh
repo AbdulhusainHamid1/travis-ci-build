@@ -59,7 +59,7 @@ PORTS=( 4000 4001 4002 4003 )
 
 check_dependencies
 clean
-pull-travis-build
+#pull-travis-build
 for port in ${PORTS[*]}; do
   start-travis-build $port
 done
